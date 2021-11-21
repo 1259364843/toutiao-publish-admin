@@ -10,11 +10,27 @@ import axios from 'axios'
 // 创建一个 axios 实例，说白了就是复制了一个 axios
 // 我们通过这个实例去发请求，把需要的配置配置给这个实例来处理
 const request = axios.create({
-  baseURL: 'http://api-toutiao-web.itheima.net' // 最新接口地址
+  baseURL: 'http://api-toutiao-web.itheima.net'
   // baseURL: 'http://ttapi.research.itcast.cn/' // 最新接口地址
 })
 
 // 请求拦截器
+
+// 任何请求都会经过这里
+// config是当前请求相关的配置信息，可以进行修改
+// return config后请求才会发出去
+request.interceptors.request.use(function (config) {
+  console.log(config)
+  // 从本地存储获取user数据并转换成对象
+  const user = JSON.parse(localStorage.getItem('user'))
+  if (user) {
+    config.headers.Authorization = `Bearer ${user.token}`
+  }
+  return config
+}, function (error) {
+  // 对请求错误做些什么
+  return Promise.reject(error)
+})
 
 // 响应拦截器
 

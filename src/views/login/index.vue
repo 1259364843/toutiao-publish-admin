@@ -49,11 +49,11 @@ export default {
   data () {
     return {
       user: {
-				mobile: '',
-				code: '',
-				agree: false
-        // mobile: '13611111111', // 手机号
-        // code: '246810'// 验证码
+				// mobile: '',
+				// code: '',
+				agree: false,
+        mobile: '13911111111', // 手机号
+        code: '246810'// 验证码
       },
       checked: false, // 是否同意协议的选中状态
 			// 登录的loading效果
@@ -116,6 +116,12 @@ export default {
 				// 关闭登录按钮loading
 				this.loginLoading = false
 				console.log(res)
+        // 将接口返回的用户相关数据存放到本地存储，方便使用
+        window.localStorage.setItem('user', JSON.stringify(res.data.data))
+        // 路由跳转到首页
+        this.$router.push({
+          name: 'layout'
+        })
 			})
 			.catch(err => {
 				// 登录验证失败
