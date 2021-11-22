@@ -3,6 +3,7 @@
  */
 import axios from 'axios'
 
+import JSONbigint from 'json-bigint'
 // axios()
 // axios.get()
 // axios.post()
@@ -10,8 +11,19 @@ import axios from 'axios'
 // 创建一个 axios 实例，说白了就是复制了一个 axios
 // 我们通过这个实例去发请求，把需要的配置配置给这个实例来处理
 const request = axios.create({
-  baseURL: 'http://api-toutiao-web.itheima.net'
+  baseURL: 'http://api-toutiao-web.itheima.net',
   // baseURL: 'http://ttapi.research.itcast.cn/' // 最新接口地址
+
+  // 定义后端返回的原始数据的处理
+  // data是原始JSON数据
+  transformResponse: [function (data) {
+    try {
+      // 后端返回的数据可能不是标准的JSON字符串
+      return JSONbigint.parse(data)
+    } catch (error) {
+      return data
+    }
+  }]
 })
 
 // 请求拦截器
