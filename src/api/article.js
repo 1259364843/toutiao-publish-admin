@@ -35,3 +35,46 @@ export const getArticles = (params) => {
         url: `/mp/v1_0/articles/${articleId}`
     })
 }
+
+/**
+ * 新增一篇文章
+  */
+
+export const addArticle = (data, draft = false) => {
+    return request({
+        method: 'POST',
+        url: '/mp/v1_0/articles',
+        params: {
+            // 是否存为草稿，true为草稿
+            draft: draft
+        },
+        // 请求体
+        data: data
+    })
+}
+
+/**
+ * 修改一篇文章
+  */
+
+ export const updateArticle = (articleId, data, draft = false) => {
+    return request({
+        method: 'PUT',
+        url: `/mp/v1_0/articles/${articleId}`,
+        params: {
+            draft: draft
+        },
+        data: data
+    })
+}
+
+/**
+ * 获取指定文章
+  */
+
+ export const getArticle = (articleId) => {
+    return request({
+        method: 'GET',
+        url: `/mp/v1_0/articles/${articleId}`
+    })
+}

@@ -6,7 +6,7 @@ import Login from '@/views/login'
 import Home from '@/views/home'
 import Layout from '@/views/layout'
 import Article from '@/views/article'
-
+import Publish from '@/views/publish'
 Vue.use(VueRouter)
 
 // 路由配置表
@@ -36,6 +36,11 @@ const routes = [
         path: '/article',
         name: 'article',
         component: Article
+      },
+      {
+        path: '/publish',
+        name: 'publish',
+        component: Publish
       }
     ]
   }
