@@ -1,7 +1,7 @@
 <!--  -->
 <template>
-   <div class='publish-container'>
-       <!-- 卡片 -->
+  <div class='publish-container'>
+  <!-- 卡片 -->
 	<el-card class="filter-card">
 	<div slot="header" class="clearfix">
 		<!-- 面包屑 -->
