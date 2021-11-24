@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-   <div class='image-container'>
+  <div class='image-container'>
        <!-- 卡片 -->
 	<el-card class="filter-card">
 	<div slot="header" class="clearfix">
