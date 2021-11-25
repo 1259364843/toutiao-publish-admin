@@ -1,7 +1,7 @@
 <!--  -->
 <template>
     <el-menu
-      default-active="/"
+      :default-active="$route.path"
       @open="handleOpen"
       @close="handleClose"
       background-color="#002033"

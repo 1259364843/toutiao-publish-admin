@@ -37,6 +37,14 @@
             <el-radio :label="0">无图</el-radio>
             <el-radio :label="-1">自动</el-radio>
             </el-radio-group>
+            <!-- 封面图 -->
+            <template v-if="article.cover.type > 0">
+            <upload-cover
+              :key="cover"
+              v-for="(cover, index) in article.cover.type"
+              v-model="article.cover.images[index]"
+            />
+          </template>
         </el-form-item>
         <el-form-item label="频道" prop="channel_id">
             <el-select v-model="article.channel_id" placeholder="请选择频道">
@@ -87,11 +95,13 @@ import {
 import 'element-tiptap/lib/index.css'
 
 import { uploadImage } from '@/api/image'
+import UploadCover from './components/upload-cover.vue'
 export default {
   // import引入的组件需要注入到对象中才能使用
   name: 'PublishIndex',
   components: {
-      'el-tiptap': ElementTiptap
+      'el-tiptap': ElementTiptap,
+      UploadCover
   },
   data () {
     // 这里存放数据
@@ -224,6 +234,11 @@ export default {
             // 把返回的数据绑定
             this.article = res.data.data
         })
+      },
+      // 封面图上传完成
+      onUpdateCover (index, url) {
+        // 可能是单图或三图
+        this.article.cover.images[index] = url
       }
   },
   // 生命周期 - 创建完成（可以访问当前this实例）

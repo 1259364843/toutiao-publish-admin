@@ -4,6 +4,8 @@
 import axios from 'axios'
 
 import JSONbigint from 'json-bigint'
+import router from '@/router'
+import { Message } from 'element-ui'
 // axios()
 // axios.get()
 // axios.post()
@@ -44,6 +46,29 @@ request.interceptors.request.use(function (config) {
 })
 
 // 响应拦截器
+
+// 添加响应拦截器
+request.interceptors.response.use(function (response) {
+  // 对响应数据做点什么
+  return response
+}, function (error) {
+  // 对响应错误做点什么
+  const status = error.response
+  if (status === 401) {
+    // 清除本地的用户状态
+    window.localStorage.removeItem('user')
+    // 跳转到登录页
+    router.push('/login')
+    Message.error('登录状态无效')
+  } else if (status === 403) {
+    Message('没有操作权限')
+  } else if (status === 400) {
+    Message('客户端参数错误')
+  } else if (status >= 500) {
+    Message.error('服务器内部错误')
+  }
+  return Promise.reject(error)
+})
 
 // 导出请求方法
 export default request
