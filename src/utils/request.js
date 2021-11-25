@@ -32,7 +32,6 @@ const request = axios.create({
 // config是当前请求相关的配置信息，可以进行修改
 // return config后请求才会发出去
 request.interceptors.request.use(function (config) {
-  console.log(config)
   // 从本地存储获取user数据并转换成对象
   const user = JSON.parse(localStorage.getItem('user'))
   if (user) {

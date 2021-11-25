@@ -11,7 +11,9 @@
     </div>
     <el-dropdown @command="handleCommand">
       <div class="avatar-wrap" v-if="user">
-        <img class="avatar" src="http://q1.qlogo.cn/g?b=qq&nk=1259364843&s=640" alt="">
+        <img
+        class="avatar"
+        :src="user.photo">
         <!-- <span>{{user.name}}</span> -->
         <h3>{{user.name}}</h3>
         <i class="el-icon-arrow-down el-icon--right"></i>
@@ -26,6 +28,9 @@
 </template>
 
 <script>
+// 全局事件总线
+import globalBus from '@/utils/global-bus'
+
 export default {
   name: 'AppHeader',
   components: {},
@@ -54,6 +59,11 @@ export default {
     }
   },
   created () {
+    // 监听全局事件总线
+    globalBus.$on('update-user', (data) => {
+      this.user.name = data.name
+      this.user.photo = data.photo
+    })
   },
   mounted () {
   },
