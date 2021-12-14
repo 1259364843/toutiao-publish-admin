@@ -15,10 +15,6 @@ Vue.use(VueRouter)
 
 // 路由配置表
 const routes = [
-  // {
-  //   path: '/',
-  //   redirect: '/login'
-  // },
   {
     path: '/login',
     name: 'login',

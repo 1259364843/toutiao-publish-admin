@@ -21,7 +21,7 @@
 
 // 2.加载echarts
 import * as echarts from 'echarts'
-
+import { getFans } from '@/api/statistics'
 export default {
   // import引入的组件需要注入到对象中才能使用
   name: 'FansIndex',

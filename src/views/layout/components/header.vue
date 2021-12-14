@@ -7,7 +7,7 @@
          'el-icon-s-unfold': !isCollapse
        }"
        @click="changeCollapse"></i>
-      <span>江苏传智播客科技教育有限公司</span>
+      <span>头条文章后台管理系统</span>
     </div>
     <el-dropdown @command="handleCommand">
       <div class="avatar-wrap" v-if="user">
@@ -20,8 +20,7 @@
       </div>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>设置</el-dropdown-item>
-        <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
-        <el-dropdown-item command="logout">退出2</el-dropdown-item>
+        <el-dropdown-item command="logout">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -53,7 +52,7 @@ export default {
     user: {
       handler (newVal, oldVal) {
         // 新值是传过来的，老值是默认的
-      console.log(newVal, oldVal)
+      // console.log(newVal, oldVal)
     },
     deep: true
     }
