@@ -1,69 +1,134 @@
 <!--  -->
 <template>
+  <div class="layout-sider">
     <el-menu
+      class="menu-container"
       :default-active="$route.path"
       @open="handleOpen"
       @close="handleClose"
-      background-color="#002033"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      background-color="#f8f8f8"
+      text-color="#222"
+      active-text-color="#ff5e5e"
       router
-      :collapse = "isCollapse"
-      >
-      <!-- 循环遍历取出菜单数据 -->
-        <el-menu-item v-for="item in aside" :key="item.id" :index="item.path">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">{{item.text}}</span>
-        </el-menu-item>
+      :collapse="isCollapse"
+    >
+      <div class="logo">
+        <a class="shead_logo" href="/">头条号</a>
+      </div>
+      <div class="menu-wrapper">
+        <div class="menu">
+          <!-- 循环遍历取出菜单数据 -->
+          <el-menu-item
+            class="menu-item"
+            v-for="item in aside"
+            :key="item.id"
+            :index="item.path"
+          >
+            <i :class="'iconfont ' + item.icon"></i>
+            <span slot="title">{{ item.text }}</span>
+          </el-menu-item>
+        </div>
+      </div>
     </el-menu>
+  </div>
 </template>
 
 <script>
-// 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-// 例如：import 《组件名称》 from '《组件路径》';
-
 export default {
   // import引入的组件需要注入到对象中才能使用
   name: 'AppAside',
-  components: {},
-  data () {
+  data() {
     // 这里存放数据
     return {
       aside: [
-        { index: 1, text: '首页', path: '/' },
-        { index: 2, text: '内容管理', path: '/article' },
-        { index: 3, text: '素材管理', path: '/image' },
-        { index: 4, text: '发布文章', path: '/publish' },
-        { index: 5, text: '评论管理', path: '/comment' },
-        { index: 6, text: '粉丝管理', path: '/fans' },
-        { index: 7, text: '个人设置', path: '/settings' }
+        { index: 1, icon: 'icon-Home', text: '首页', path: '/' },
+        { index: 2, icon: 'icon-document', text: '内容管理', path: '/article' },
+        { index: 3, icon: 'icon-picture', text: '素材管理', path: '/image' },
+        {
+          index: 4,
+          icon: 'icon-s-promotion',
+          text: '发布文章',
+          path: '/publish'
+        },
+        {
+          index: 5,
+          icon: 'icon-chat-dot-round',
+          text: '评论管理',
+          path: '/comment'
+        },
+        { index: 6, icon: 'icon-present', text: '粉丝管理', path: '/fans' },
+        { index: 7, icon: 'icon-setting', text: '个人设置', path: '/settings' }
       ],
       isCollapse: false
     }
   },
-  // 监听属性 类似于data概念
-  computed: {},
-  // 监控data中的数据变化
-  watch: {},
   // 方法集合
   methods: {
-    handleOpen (key, keyPath) {
-    console.log(key, keyPath)
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath)
     },
-    handleClose (key, keyPath) {
-    console.log(key, keyPath)
+    handleClose(key, keyPath) {
+      console.log(key, keyPath)
     }
-  },
-  // 生命周期 - 创建完成（可以访问当前this实例）
-  created () {
-
-  },
-  // 生命周期 - 挂载完成（可以访问DOM元素）
-  mounted () {
-
   }
-  }
+}
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
+.layout-sider {
+  width: 240px;
+  height: 100%;
+  overflow: auto;
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    .shead_logo {
+      float: left;
+      color: transparent;
+      width: 80px;
+      height: 100%;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzdweCIgaGVpZ2h0PSIyN3B4IiB2aWV3Qm94PSIwIDAgNzcgMjciIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUyLjQgKDY3Mzc4KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT7lkIjlubblvaLnirY8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZyBpZD0i57uI56i/IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iMummlumhtS1jb3B5LTIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzcwLjAwMDAwMCwgLTE3LjAwMDAwMCkiIGZpbGw9IiNGRjM3M0MiPgogICAgICAgICAgICA8ZyBpZD0idGFiIj4KICAgICAgICAgICAgICAgIDxnIGlkPSLliIbnu4QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM3MC4wMDAwMDAsIDE3LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik01Ny42Mjg5MzUsNy4yNjg4MDUgTDcxLjEyODgsNy4yNjg4MDUgTDcxLjEyODgsNS4xMyBMNTcuNjI4OTM1LDUuMTMgTDU3LjYyODkzNSw3LjI2ODgwNSBaIE01My42Njg5OCwxMC42ODg4OTUgTDUzLjY2ODk4LDEuNzEwMDQ1IEw3NS4wODg3NTUsMS43MTAwNDUgTDc1LjA4ODc1NSwxMC42ODg4OTUgTDUzLjY2ODk4LDEwLjY4ODg5NSBaIE01Mi4yMjg5NjIsMTIuNzEzOTA4NSBMNzYuNTI4ODI3LDEyLjcxMzkwODUgTDc2LjUyODgyNywxNS44NjM5OTg1IEw1OS45MjA1ODcsMTUuODYzOTk4NSBMNTkuMzYxMjgyLDE3Ljg4OTEzMzUgTDc1LjYyODc4MiwxNy44ODkxMzM1IEw3NS42Mjg3ODIsMTkuNzI2NzUzNSBMNzQuMDA4NzgyLDI3LjAwMDAxMzUgTDU3LjYyODk2MiwyNy4wMDAwMTM1IEw1Ny42Mjg5NjIsMjMuNTgwMDU4NSBMNzAuODEwNjMyLDIzLjU4MDA1ODUgTDcxLjMxNjM0MiwyMS4zMDkwODg1IEw1NC45Mjg5NjIsMjEuMzA5MDg4NSBMNTQuOTI4OTYyLDE5LjU5OTA0MzUgTDU1Ljk2MDc2NywxNS44NjM5OTg1IEw1Mi4yMjg5NjIsMTUuODYzOTk4NSBMNTIuMjI4OTYyLDEyLjcxMzkwODUgWiBNMTAuODUzNzMsMi45NDM1NjcgTDEwLjg1MzczLDYuNzYwNjkyIEwyLjI0NjY3LDUuNTI3MDYyIEwyLjI0NjY3LDEuNzA5OTM3IEwxMC44NTM3MywyLjk0MzU2NyBaIE0xMC44NTM3Myw5LjQwMzA2MDUgTDEwLjg1MzczLDEzLjIyMDE4NTUgTDIuMjQ2NjcsMTEuOTg2NTU1NSBMMi4yNDY2Nyw4LjE2OTQzMDUgTDEwLjg1MzczLDkuNDAzMDYwNSBaIE0zNi4yNDExNDE1LDEzLjkxODk0NTUgTDQwLjIwMTIzMTUsMTMuOTE4OTQ1NSBMNDAuMjAxMjMxNSwxNS44NjQwMjU1IEw1MC4zOTk5NDE1LDE1Ljg2NDAyNTUgTDUwLjM5OTk0MTUsMTkuMjgzOTgwNSBMNDAuMjAxMjMxNSwxOS4yODM5ODA1IEw0MC4yMDEyMzE1LDI2Ljk5OTc3MDUgTDM2LjI0MTE0MTUsMjYuOTk5NzcwNSBMMzYuMjQxMTQxNSwxOS4yODM5ODA1IEwyNi4xMDAyMTE1LDE5LjI4Mzk4MDUgTDI2LjEwMDIxMTUsMTUuODY0MDI1NSBMMzYuMjQxMTQxNSwxNS44NjQwMjU1IEwzNi4yNDExNDE1LDEzLjkxODk0NTUgWiBNMTcuNTcyNTQ1LDAuODU1MDIyNSBDMTcuNDc0MTMsOC4xMzkzNTI1IDE3LjMzOTEzLDEyLjQ5NjM0MjUgMTYuMjgyNjIsMTUuODY0MDUyNSBMMjQuMjk5ODY1LDE1Ljg2NDA1MjUgTDI0LjI5OTg2NSwxOS4yODQwMDc1IEwxNC42OTI3MjUsMTkuMjg0MDA3NSBDMTMuMTU4NTg1LDIxLjY4MDEyMjUgMTAuNzcyNzMsMjMuODg4MzE3NSA3LjAzNTEyLDI2Ljk5OTc5NzUgTDAuOTM5MDYsMjYuOTk5Nzk3NSBDMS4yMDE3NywyNi43ODQ4Nzc1IDEuNDU4OTQ1LDI2LjU3NDY4MjUgMS43MDc2MTUsMjYuMzcxNTA3NSBDNS40NjM4NTUsMjMuMzAxNzQyNSA4LjA0NTE5LDIxLjE5MTY5MjUgOS43OTU4NywxOS4yODQwMDc1IEwtMi4zMDkyNjM4OWUtMTQsMTkuMjg0MDA3NSBMLTIuMzA5MjYzODllLTE0LDE1Ljg2NDA1MjUgTDEyLjE0MTA5LDE1Ljg2NDA1MjUgQzEzLjQ5NzE2NSwxMi44Mjk3OTI1IDEzLjYwMTc5LDguNDk4MzE3NSAxMy43MDIzNjUsMC44NTUwMjI1IEwxNy41NzI1NDUsMC44NTUwMjI1IFogTTE1Ljg3MzcwNSwyMC45OTQwNzk1IEwyMC41NDMyMiwyMC45OTQwNzk1IEwyNC4yOTYwODUsMjYuOTk5Njg5NSBMMTkuNjI2NTcsMjYuOTk5Njg5NSBMMTUuODczNzA1LDIwLjk5NDA3OTUgWiBNNDEuOTc3MzU5LDIwLjk5NDA3OTUgTDQ2LjY0Njg3NCwyMC45OTQwNzk1IEw1MC4zOTk3MzksMjYuOTk5Njg5NSBMNDUuNzMwMjI0LDI2Ljk5OTY4OTUgTDQxLjk3NzM1OSwyMC45OTQwNzk1IFogTTI2LjA5OTgzMzUsMjYuOTk5NzMgTDI5Ljg1MjU2MzUsMjAuOTk0MTIgTDM0LjUyMjA3ODUsMjAuOTk0MTIgTDMwLjc2OTM0ODUsMjYuOTk5NzMgTDI2LjA5OTgzMzUsMjYuOTk5NzMgWiBNMzIuMzUzNzM1NSw1LjEzIEMzMy43MDI3OTA1LDYuMDA4MzEgMzUuNTQ4Mzc1NSw3LjAyNTgwNSAzOC4yNzQ0MzA1LDguMDQwODcgQzQxLjAwNTM0NTUsNy4wMjQ3MjUgNDIuODI3ODQ1NSw2LjAwNzIzIDQ0LjExNzc3MDUsNS4xMyBMMzIuMzUzNzM1NSw1LjEzIFogTTUwLjM5OTcyNTUsMTQuNzQ2MzIgQzQ1LjE5NTA3MDUsMTMuODk1MjggNDEuMjMwNzk1NSwxMi44NzQ4MTUgMzguMTYyMjQ1NSwxMS44MjQzOCBDMzUuMDU1NzYwNSwxMi45MDQxMSAzMS4xMjE0NTU1LDEzLjkyNDk4IDI2LjA5OTg2MDUsMTQuNzQ0MDI1IEwyNi4wOTk4NjA1LDExLjA5NTUxNSBDMjguNzMzNzEwNSwxMC42NTIzMSAzMS4wMTQ1MzU1LDEwLjE2ODIgMzIuOTk3MjgwNSw5LjY2MzMgQzMwLjg0MjI3NTUsOC41NTczOCAyOS40NTQ4ODA1LDcuNTI3NzM1IDI4LjQwNTY2MDUsNi43NDg5MiBDMjguMjQ2MjI1NSw2LjYzMDUyNSAyNi43Nzc0MjU1LDUuNDg2MTMgMjYuNzc3NDI1NSw1LjQ4NjEzIEwzMC40NTA3NzU1LC0xLjU5ODcyMTE2ZS0xNCBMMzQuMTExODQwNSwxLjcxMDA0NSBMNDkuMDQ5ODYwNSwxLjcxMDA0NSBMNDkuMDQ5ODYwNSw1LjY4ODc2NSBDNDcuOTQyNzI1NSw2LjY4MTI4NSA0Ni4yNzIxMDA1LDguMTE1OTMgNDMuMzY0ODc1NSw5LjYyMDM3IEM0NS4zNzkzNDU1LDEwLjE0MjAxIDQ3LjcwNDA0NTUsMTAuNjQxNTEgNTAuMzk5NzI1NSwxMS4wOTcxMzUgTDUwLjM5OTcyNTUsMTQuNzQ2MzIgWiIgaWQ9IuWQiOW5tuW9oueKtiI+PC9wYXRoPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 50%;
+    }
+  }
+  .menu-container {
+    height: 100%;
+  }
 
+  .menu-wrapper {
+    position: fixed;
+    height: calc(100% - 64 px);
+    width: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 100;
+    .menu {
+      margin-top: 12px;
+      margin-bottom: 32px;
+      padding: 0 15px;
+      background: transparent;
+      .menu-item {
+        display: block;
+        font-size: 18px;
+        width: 208px;
+        padding: 0 30px !important;
+        margin-bottom: 4px;
+        border-radius: 2px;
+        color: #222;
+        .iconfont {
+          font-size: 20px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+// 覆盖element样式
+.is-active {
+  font-weight: 600;
+}
 </style>
