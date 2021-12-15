@@ -17,8 +17,8 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>设置</el-dropdown-item>
-                <el-dropdown-item command="logout">退出</el-dropdown-item>
+                <el-dropdown-item command="settings"><i class="el-icon-setting"></i>个人设置</el-dropdown-item>
+                <el-dropdown-item command="logout"><i class="el-icon-circle-close"></i>退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -76,6 +76,12 @@ export default {
     handleCommand(command) {
       // 传递过来的是函数名，间接执行函数
       this[command]()
+    },
+    // 个人设置
+    settings() {
+      this.$router.push({
+        name: 'settings'
+      })
     },
     // 退出
     logout() {
