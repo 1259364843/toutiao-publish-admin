@@ -1,7 +1,18 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-html, body, #app {
-    height: 100%;
+html,
+body,
+#app {
+  height: 100%;
 }
+.el-card {
+  border-radius: 10px;
+}
+.el-tiptap-editor__menu-bar,
+.el-tiptap-editor__content,
+.el-tiptap-editor__footer {
+  border: none !important;
+}
+

@@ -6,15 +6,11 @@ import axios from 'axios'
 import JSONbigint from 'json-bigint'
 import router from '@/router'
 import { Message } from 'element-ui'
-// axios()
-// axios.get()
-// axios.post()
 
 // 创建一个 axios 实例，说白了就是复制了一个 axios
 // 我们通过这个实例去发请求，把需要的配置配置给这个实例来处理
 const request = axios.create({
   baseURL: 'http://api-toutiao-web.itheima.net',
-  // baseURL: 'http://ttapi.research.itcast.cn/' // 最新接口地址
 
   // 定义后端返回的原始数据的处理
   // data是原始JSON数据
@@ -72,11 +68,3 @@ request.interceptors.response.use(function (response) {
 
 // 导出请求方法
 export default request
-
-// 谁要使用谁就加载 request 模块
-// import request from 'request.js'
-// request.xxx
-// request({
-//   method: ,
-//   url: ''
-// })
